@@ -1,6 +1,8 @@
 package com.example.ssmdemo.service;
 
+import com.example.ssmdemo.bean.BookExample;
 import com.example.ssmdemo.bean.Type;
+import com.example.ssmdemo.bean.TypeExample;
 import com.example.ssmdemo.dao.TypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,10 @@ public class TypeService {
     public boolean typeDelete(Integer id){
         return typeMapper.deleteByPrimaryKey(id)==1;
     }
-    
+
+    public List<Type> typeListSearch(String typeName) {
+        TypeExample typeExample = new TypeExample();
+        typeExample.createCriteria().andTypenameLike("%"+typeName+"%");
+        return typeMapper.selectByExample(typeExample);
+    }
 }

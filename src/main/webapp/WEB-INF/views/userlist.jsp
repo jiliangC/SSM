@@ -59,12 +59,12 @@
             <div class="concierge-list">
                 <div class="search-form">
                     <div class="form-item">
-                        <label>用户名</label>
-                        <input id="uname">
+                        <label>手机号</label>
+                        <input id="inputPhone">
                     </div>
                     <div class="form-item">
-                        <label>姓名昵称</label>
-                        <input id="name">
+                        <label>用户名</label>
+                        <input id="inputUsername">
                     </div>
                     <div class="form-item btns-item">
                         <button class="success" id="new" onclick="onNew()">新增</button>
@@ -98,6 +98,38 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- 分页条信息 -->
+                <div >
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li><a href="${APP_PATH}/bookList">首页</a></li>
+                            <c:if test="${pageInfo.hasPreviousPage }">
+                                <li><a href="${APP_PATH }/userListSearch?pn=${pageInfo.pageNum-1}"
+                                       aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                                </a></li>
+                            </c:if>
+
+
+                            <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                                <c:if test="${page_Num == pageInfo.pageNum }">
+                                    <li class="active"><a href="${APP_PATH}/userListSearch">${page_Num }</a></li>
+                                </c:if>
+                                <c:if test="${page_Num != pageInfo.pageNum }">
+                                    <li><a href="${APP_PATH }/userListSearch?pn=${page_Num }">${page_Num }</a></li>
+                                </c:if>
+
+                            </c:forEach>
+                            <c:if test="${pageInfo.hasNextPage }">
+                                <li><a href="${APP_PATH }/userListSearch?pn=${pageInfo.pageNum+1 }"
+                                       aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+                                </a></li>
+                            </c:if>
+                            <li><a href="${APP_PATH }/userListSearch?pn=${pageInfo.pages}">末页</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
 
             </div>
             <div class="dialog dialog-page" style="display: none;" id="edit">
@@ -224,10 +256,19 @@ myform.action="userSave";
         document.getElementById("shadow").style.display="none";
     }
     function loadRecord(){
+        let phone = document.getElementById("inputPhone").value
+        let username = document.getElementById("inputUsername").value
+
+        window.location="userListSearch?phone=" + phone + "&username=" + username
         alert("查询成功！");
     }
     function pwdedit() {
         window.location="pwEdit"
+    }
+
+    function pageChange(pageNum) {
+
+
     }
 </script>
 </html>

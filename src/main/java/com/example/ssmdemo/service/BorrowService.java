@@ -1,5 +1,7 @@
 package com.example.ssmdemo.service;
 
+import com.example.ssmdemo.bean.Book;
+import com.example.ssmdemo.bean.BookExample;
 import com.example.ssmdemo.bean.Borrow;
 import com.example.ssmdemo.bean.BorrowExample;
 import com.example.ssmdemo.dao.BorrowMapper;
@@ -91,4 +93,9 @@ public class BorrowService {
         return new java.sql.Date(date.getTime());
     }
 
+    public List<Borrow> borrowListSearch(String bookName, String username) {
+        BorrowExample borrowExample = new BorrowExample();
+        borrowExample.createCriteria().andBookNameLike("%"+bookName+"%").andCustomerNameLike("%"+username+"%");
+        return borrowMapper.selectByExampleWithBookCustomer(borrowExample);
+    }
 }

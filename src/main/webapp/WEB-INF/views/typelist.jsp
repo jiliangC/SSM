@@ -59,13 +59,10 @@
             <div class="concierge-list">
                 <div class="search-form">
                     <div class="form-item">
-                        <label>用户名</label>
-                        <input id="uname">
+                        <label>分类名称</label>
+                        <input id="inputTypeName">
                     </div>
-                    <div class="form-item">
-                        <label>姓名昵称</label>
-                        <input id="name">
-                    </div>
+
                     <div class="form-item btns-item">
                         <button class="success" id="new" onclick="onNew()">新增</button>
                         <button class="primary" id="search" onclick="loadRecord()">查询</button>
@@ -82,7 +79,7 @@
                         </thead>
                         <tbody id="list-rows">
 
-                        <c:forEach var="type" items="${types}">
+                        <c:forEach var="type" items="${pageInfo.list}">
                         <tr>
                             <td class="tC">${type.id}</td>
                             <td class="tC">${type.typename}</td>
@@ -97,6 +94,38 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- 分页条信息 -->
+                <div >
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li><a href="${APP_PATH}/typeListSearch">首页</a></li>
+                            <c:if test="${pageInfo.hasPreviousPage }">
+                                <li><a href="${APP_PATH }/typeListSearch?pn=${pageInfo.pageNum-1}"
+                                       aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                                </a></li>
+                            </c:if>
+
+
+                            <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                                <c:if test="${page_Num == pageInfo.pageNum }">
+                                    <li class="active"><a href="${APP_PATH}/typeListSearch">${page_Num }</a></li>
+                                </c:if>
+                                <c:if test="${page_Num != pageInfo.pageNum }">
+                                    <li><a href="${APP_PATH }/typeListSearch?pn=${page_Num }">${page_Num }</a></li>
+                                </c:if>
+
+                            </c:forEach>
+                            <c:if test="${pageInfo.hasNextPage }">
+                                <li><a href="${APP_PATH }/typeListSearch?pn=${pageInfo.pageNum+1 }"
+                                       aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+                                </a></li>
+                            </c:if>
+                            <li><a href="${APP_PATH }/typeListSearch?pn=${pageInfo.pages}">末页</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
 
             </div>
             <div class="dialog dialog-page" style="display: none;" id="edit">
@@ -196,6 +225,8 @@ if(opo=="edit"){
         document.getElementById("shadow").style.display="none";
     }
     function loadRecord(){
+        let typeName = document.getElementById("inputTypeName").value
+        window.location="typeListSearch?typeName=" + typeName
         alert("查询成功！");
     }
     function pwdedit() {

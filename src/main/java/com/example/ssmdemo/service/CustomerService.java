@@ -62,5 +62,10 @@ public class CustomerService {
     public boolean customerDelete(Integer id){
         return customerMapper.deleteByPrimaryKey(id)==1;
     }
-    
+
+    public List<Customer> customerListSearch(String phone, String username, String address, String company) {
+        CustomerExample customerExample = new CustomerExample();
+        customerExample.createCriteria().andPhoneLike("%"+ phone+ "%").andNameLike("%"+username+"%").andAddressLike("%"+address+"%").andCompanyLike("%"+company+"%");
+        return customerMapper.selectByExample(customerExample);
+    }
 }

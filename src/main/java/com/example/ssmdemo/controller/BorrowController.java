@@ -40,6 +40,22 @@ public class BorrowController {
         return mv;
     }
 
+    @RequestMapping("/borrowListSearch")
+    public ModelAndView borrowListSearch(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "bookName", defaultValue="") String bookName,
+            @RequestParam(value = "username", defaultValue="") String username) {
+
+        PageHelper.startPage(pn,size);
+        List<Borrow> borrowList = borrowService.borrowListSearch(bookName, username);
+        PageInfo<Borrow> pageInfo = new PageInfo<>(borrowList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("borrowlist");
+        return modelAndView;
+    }
+
     @RequestMapping("/borrowSave")
     public ModelAndView borrowSave(Borrow borrow){
         borrowService.borrowInsert(borrow);

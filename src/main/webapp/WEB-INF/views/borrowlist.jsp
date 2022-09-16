@@ -49,12 +49,12 @@
             <div class="concierge-list">
                 <div class="search-form">
                     <div class="form-item">
-                        <label>用户名</label>
-                        <input id="uname">
+                        <label>书名</label>
+                        <input id="inputBookName">
                     </div>
                     <div class="form-item">
-                        <label>姓名昵称</label>
-                        <input id="name">
+                        <label>借书人</label>
+                        <input id="inputUsername">
                     </div>
                     ${user.name}
                     <div class="form-item btns-item">
@@ -105,7 +105,7 @@
                             <ul class="pagination">
                                 <li><a href="${APP_PATH}/borrowList">首页</a></li>
                                 <c:if test="${pageInfo.hasPreviousPage }">
-                                    <li><a href="${APP_PATH }/borrowList?pn=${pageInfo.pageNum-1}"
+                                    <li><a href="${APP_PATH }/borrowListSearch?pn=${pageInfo.pageNum-1}"
                                            aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
                                     </a></li>
                                 </c:if>
@@ -113,10 +113,10 @@
 
                                 <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
                                     <c:if test="${page_Num == pageInfo.pageNum }">
-                                        <li class="active"><a href="${APP_PATH}/borrowList">${page_Num }</a></li>
+                                        <li class="active"><a href="${APP_PATH}/borrowListSearch">${page_Num }</a></li>
                                     </c:if>
                                     <c:if test="${page_Num != pageInfo.pageNum }">
-                                        <li><a href="${APP_PATH }/borrowList?pn=${page_Num }">${page_Num }</a></li>
+                                        <li><a href="${APP_PATH }/borrowListSearch?pn=${page_Num }">${page_Num }</a></li>
                                     </c:if>
 
                                 </c:forEach>
@@ -125,7 +125,7 @@
                                            aria-label="Next"> <span aria-hidden="true">&raquo;</span>
                                     </a></li>
                                 </c:if>
-                                <li><a href="${APP_PATH }/borrowList?pn=${pageInfo.pages}">末页</a></li>
+                                <li><a href="${APP_PATH }/borrowListSearch?pn=${pageInfo.pages}">末页</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -173,6 +173,11 @@
 
         myform.submit();
         //提交表单
+    }
+    function loadRecord() {
+        let username = document.getElementById("inputUsername").value
+        let bookName = document.getElementById("inputBookName").value
+        window.location="borrowListSearch?bookName=" + bookName + "&username=" + username
     }
 function pwdedit() {
     window.location="pwEdit"

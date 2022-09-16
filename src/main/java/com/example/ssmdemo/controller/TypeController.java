@@ -1,5 +1,6 @@
 package com.example.ssmdemo.controller;
 
+import com.example.ssmdemo.bean.Borrow;
 import com.example.ssmdemo.bean.Message;
 import com.example.ssmdemo.bean.Type;
 import com.example.ssmdemo.service.TypeService;
@@ -18,11 +19,41 @@ public class TypeController {
     @Autowired
     TypeService typeService;
 
-    @RequestMapping("typeList")
+    /*@RequestMapping("typeList")
     public ModelAndView typeList(){
         List<Type> types = typeService.typeList();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("types",types);
+        modelAndView.setViewName("typelist");
+        return modelAndView;
+    }*/
+
+    @RequestMapping("typeList")
+    public ModelAndView typeList(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "typeName", defaultValue="") String typeName) {
+
+        PageHelper.startPage(pn,size);
+        List<Type> typeList = typeService.typeListSearch(typeName);
+        PageInfo<Type> pageInfo = new PageInfo<>(typeList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("typelist");
+        return modelAndView;
+    }
+
+    @RequestMapping("typeListSearch")
+    public ModelAndView typeListSearch(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "typeName", defaultValue="") String typeName) {
+
+        PageHelper.startPage(pn,size);
+        List<Type> typeList = typeService.typeListSearch(typeName);
+        PageInfo<Type> pageInfo = new PageInfo<>(typeList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
         modelAndView.setViewName("typelist");
         return modelAndView;
     }

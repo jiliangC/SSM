@@ -1,5 +1,6 @@
 package com.example.ssmdemo.controller;
 
+import com.example.ssmdemo.bean.Book;
 import com.example.ssmdemo.bean.Message;
 import com.example.ssmdemo.bean.Customer;
 import com.example.ssmdemo.service.CustomerService;
@@ -20,11 +21,48 @@ public class CustomerController {
     CustomerService customerService;
 
 
-    @RequestMapping("customerList")
+    /*@RequestMapping("customerList")
     public ModelAndView customerList(){
         List<Customer> customers = customerService.customerList();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("customers",customers);
+        modelAndView.setViewName("customerlist");
+        return modelAndView;
+    }*/
+
+    @RequestMapping("customerList")
+    public ModelAndView customerList(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "phone", defaultValue="") String phone,
+            @RequestParam(value = "username", defaultValue="") String username,
+            @RequestParam(value = "address", defaultValue="") String address,
+            @RequestParam(value = "company", defaultValue="") String company) {
+
+        PageHelper.startPage(pn,size);
+        List<Customer> customerList = customerService.customerListSearch(phone, username, address, company);
+        PageInfo<Customer> pageInfo = new PageInfo<>(customerList,size);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("customerlist");
+        return modelAndView;
+    }
+
+    @RequestMapping("customerListSearch")
+    public ModelAndView customerListSearch(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "phone", defaultValue="") String phone,
+            @RequestParam(value = "username", defaultValue="") String username,
+            @RequestParam(value = "address", defaultValue="") String address,
+            @RequestParam(value = "company", defaultValue="") String company) {
+
+        PageHelper.startPage(pn,size);
+        List<Customer> customerList = customerService.customerListSearch(phone, username, address, company);
+        PageInfo<Customer> pageInfo = new PageInfo<>(customerList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
         modelAndView.setViewName("customerlist");
         return modelAndView;
     }

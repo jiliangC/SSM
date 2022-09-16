@@ -132,6 +132,16 @@ public class BorrowExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
+        public Criteria andBookNameLike(String value) {
+            addCriterion("b.name like", value, "bookName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerNameLike(String value) {
+            addCriterion("c.name like", value, "customerName");
+            return (Criteria) this;
+        }
+
         public Criteria andIdIsNull() {
             addCriterion("id is null");
             return (Criteria) this;
@@ -251,6 +261,8 @@ public class BorrowExample {
             addCriterion("bookid not between", value1, value2, "bookid");
             return (Criteria) this;
         }
+
+
 
         public Criteria andCustomeridIsNull() {
             addCriterion("customerid is null");
@@ -431,6 +443,8 @@ public class BorrowExample {
             addCriterionForJDBCDate("rdate not between", value1, value2, "rdate");
             return (Criteria) this;
         }
+
+
     }
 
     public static class Criteria extends GeneratedCriteria {

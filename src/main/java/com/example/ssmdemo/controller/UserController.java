@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -33,7 +34,56 @@ public class UserController {
         }
     }
 
+    @RequestMapping("userListSearchTest")
+    public ModelAndView userListSearchTest(
+            HttpSession session,
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "phone", defaultValue="") String phone,
+            @RequestParam(value = "username", defaultValue="") String username) {
+
+        PageHelper.startPage(pn,size);
+        List<User> userList = userService.userListSearch(phone, username);
+        PageInfo<User> pageInfo = new PageInfo<>(userList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("userlist");
+        return modelAndView;
+    }
+
+    @RequestMapping("userListSearch")
+    public ModelAndView userListSearch(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "phone", defaultValue="") String phone,
+            @RequestParam(value = "username", defaultValue="") String username) {
+
+        PageHelper.startPage(pn,size);
+        List<User> userList = userService.userListSearch(phone, username);
+        PageInfo<User> pageInfo = new PageInfo<>(userList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("userlist");
+        return modelAndView;
+    }
+
     @GetMapping("userList")
+    public ModelAndView userList(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "phone", defaultValue="") String phone,
+            @RequestParam(value = "username", defaultValue="") String username) {
+
+        PageHelper.startPage(pn,size);
+        List<User> userList = userService.userListSearch(phone, username);
+        PageInfo<User> pageInfo = new PageInfo<>(userList,size);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("userlist");
+        return modelAndView;
+    }
+
+    /*@GetMapping("userList")
     @ResponseBody
     public ModelAndView userList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
@@ -49,7 +99,7 @@ public class UserController {
 //        List<User> users = userService.userList();
 //        PageInfo<User> pageInfo = new PageInfo<>(users,size);
 //        return Message.success().add("userList",pageInfo);
-    }
+    }*/
 
     @RequestMapping("userDelete")
     public ModelAndView userDelete(User user){

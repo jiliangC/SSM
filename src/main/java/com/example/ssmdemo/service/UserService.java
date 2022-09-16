@@ -1,9 +1,6 @@
 package com.example.ssmdemo.service;
 
-import com.example.ssmdemo.bean.Customer;
-import com.example.ssmdemo.bean.CustomerExample;
-import com.example.ssmdemo.bean.User;
-import com.example.ssmdemo.bean.UserExample;
+import com.example.ssmdemo.bean.*;
 import com.example.ssmdemo.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,4 +87,9 @@ public class UserService {
     }
 
 
+    public List<User> userListSearch(String phone, String username) {
+        UserExample example = new UserExample();
+        example.createCriteria().andPhoneLike("%"+phone+"%").andNameLike("%"+username+"%");
+        return userMapper.selectByExample(example);
+    }
 }
