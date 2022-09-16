@@ -3,6 +3,8 @@ package com.example.ssmdemo.dao;
 import com.example.ssmdemo.bean.Book;
 import com.example.ssmdemo.bean.BookExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BookMapper {
@@ -31,4 +33,6 @@ public interface BookMapper {
     int updateByPrimaryKeySelective(Book record);
 
     int updateByPrimaryKey(Book record);
+
+    List<Book> bookSearchList(Map<String, String> map);
 }

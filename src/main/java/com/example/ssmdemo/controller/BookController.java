@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BookController {
@@ -37,6 +39,20 @@ public class BookController {
 //        return Message.success().add("bookList",pageInfo);
         return modelAndView;
     }
+
+    @RequestMapping("bookListSearch")
+    public ModelAndView bookListSearch(
+            @RequestParam(value = "bookName", defaultValue="") String bookName,
+            @RequestParam(value = "bookType", defaultValue="") String bookType) {
+        List<Book> bookList = bookService.bookSearchList(bookName, bookType);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("books", bookList);
+        modelAndView.setViewName("booklist");
+        return modelAndView;
+    }
+
+
+
 
     @RequestMapping("bookAdd")
     public ModelAndView bookAdd(Book book){

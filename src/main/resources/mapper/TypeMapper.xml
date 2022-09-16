@@ -161,4 +161,5 @@
     set typename = #{typename,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

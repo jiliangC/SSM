@@ -365,4 +365,18 @@
       image = #{image,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="bookSearchList" parameterType="Map" resultMap="WithTypeResultMap">
+    select
+      <include refid="WithType_Column_List"/>
+    from book left join type on book.typeid = type.id
+    <where>
+      <if test="bookName!=null and bookName!=''">
+        and (book.name like CONCAT('%', '${bookName}', '%'))
+      </if>
+      <if test="typeName!=null and typeName!=''">
+        and (type.typename like CONCAT('%', '${typeName}', '%'))
+      </if>
+    </where>
+  </select>
 </mapper>

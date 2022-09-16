@@ -3,19 +3,23 @@ package com.example.ssmdemo.service;
 import com.example.ssmdemo.bean.Book;
 import com.example.ssmdemo.bean.BookExample;
 import com.example.ssmdemo.dao.BookMapper;
+import com.example.ssmdemo.dao.TypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookService {
 
     @Autowired
     BookMapper bookMapper;
+
 
 
     /*
@@ -38,6 +42,7 @@ public class BookService {
     public List<Book> bookByAuthor(String author){
         BookExample example = new BookExample();
         example.createCriteria().andAuthorEqualTo(author);
+
         return bookMapper.selectByExample(example);
     }
 
@@ -83,5 +88,14 @@ public class BookService {
         Date date;
         date = bartDateFormat.parse(dateStringToParse);
         return new java.sql.Date(date.getTime());
+    }
+
+
+    public List<Book> bookSearchList(String bookName, String bookType) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("bookName", bookName);
+        map.put("typeName", bookType);
+        List<Book> list = bookMapper.bookSearchList(map);
+        return list;
     }
 }

@@ -59,12 +59,12 @@
             <div class="concierge-list">
                 <div class="search-form">
                     <div class="form-item">
-                        <label>用户名</label>
-                        <input id="uname">
+                        <label>书名</label>
+                        <input id="inputBookName">
                     </div>
                     <div class="form-item">
-                        <label>姓名昵称</label>
-                        <input id="name">
+                        <label>类别</label>
+                        <input id="inputBookType">
                     </div>
                     <div class="form-item btns-item">
                         <button class="success" id="new" onclick="onNew()">新增</button>
@@ -269,6 +269,12 @@ if(opo=="edit"){
         document.getElementById("shadow").style.display="none";
     }
     function loadRecord(){
+        let searchParam = {
+            bookName : document.getElementById("inputBookName").value,
+            bookType : document.getElementById("inputBookType").value
+        }
+        console.log(searchParam)
+        window.location="bookListSearch?bookName=" +  searchParam.bookName + "&bookType=" + searchParam.bookType
         alert("查询成功！");
     }
     function pwdedit() {
