@@ -33,6 +33,24 @@
     <result column="typename" property="typeName" jdbcType="VARCHAR" />
   </resultMap>
 
+  <sql id="WithType_Column_List" >
+    book.id id, book.name name, ename, author, publisher, pdate, isbn, price, address, brief, typeid, image, typename
+  </sql>
+
+  <select id="bookSearchList" parameterType="Map" resultMap="WithTypeResultMap">
+    select
+    <include refid="WithType_Column_List"/>
+    from book left join type on book.typeid = type.id
+    <where>
+      <if test="bookName!=null and bookName!=''">
+        and (book.name like CONCAT('%', '${bookName}', '%'))
+      </if>
+      <if test="typeName!=null and typeName!=''">
+        and (type.typename like CONCAT('%', '${typeName}', '%'))
+      </if>
+    </where>
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -109,7 +127,7 @@
     </if>
   </select>
 
-  <sql id="WithType_Column_List" >
+  <sql id="WithType_Column_Lists" >
     book.id id, book.name name, ename, author, publisher, pdate, isbn, price, address, brief, typeid, image, typename
   </sql>
   <select id="selectByExampleWithTypeName" resultMap="WithTypeResultMap" parameterType="com.example.ssmdemo.bean.BookExample" >
@@ -118,7 +136,7 @@
       distinct
     </if>
     <include refid="WithType_Column_List" />
-    from book left join type on book.id=type.id
+    from book left join type on book.typeid=type.id
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

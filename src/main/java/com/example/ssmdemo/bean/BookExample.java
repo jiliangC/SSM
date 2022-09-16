@@ -210,6 +210,11 @@ public class BookExample {
             return (Criteria) this;
         }
 
+        public Criteria andTypeNameLike(String value) {
+            addCriterion("typename like", value, "typename");
+            return (Criteria) this;
+        }
+
         public Criteria andNameNotLike(String value) {
             addCriterion("name not like", value, "name");
             return (Criteria) this;

@@ -23,17 +23,51 @@ public class BookController {
 
 //45649687496416
 
+    @RequestMapping("bookListSearch")
+    public ModelAndView bookListSearch(
+            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value = "bookName", defaultValue="") String bookName,
+            @RequestParam(value = "bookType", defaultValue="") String bookType) {
+
+        PageHelper.startPage(pn,size);
+        List<Book> bookList = bookService.bookSearchList(bookName, bookType);
+        PageInfo<Book> pageInfo = new PageInfo<>(bookList,size);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageInfo", pageInfo);
+        modelAndView.setViewName("booklist");
+        return modelAndView;
+    }
+
+//    @RequestMapping("bookList")
+//    public ModelAndView bookList(
+//            @RequestParam(value = "pn", defaultValue="1") Integer pn,
+//            @RequestParam(value="size",defaultValue = "5") Integer size,
+//            @RequestParam(value = "bookName", defaultValue="") String bookName,
+//            @RequestParam(value = "bookType", defaultValue="") String bookType) {
+//
+//        PageHelper.startPage(pn,size);
+//        List<Book> bookList = bookService.bookSearchList(bookName, bookType);
+//        PageInfo<Book> pageInfo = new PageInfo<>(bookList,size);
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("pageInfo", pageInfo);
+//        modelAndView.setViewName("booklist");
+//        return modelAndView;
+//    }
 
     @RequestMapping("bookList")
     public ModelAndView bookList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
             @RequestParam(value="size",defaultValue = "5") Integer size){
-//        PageHelper.startPage(pn,size);
+        PageHelper.startPage(pn,size);
         List<Book> bookList = bookService.bookList();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("books",bookList);
+        PageInfo<Book> pageInfo = new PageInfo<>(bookList,size);
+        modelAndView.addObject("pageInfo",pageInfo);
         modelAndView.setViewName("booklist");
-//        PageInfo<Book> pageInfo = new PageInfo<>(bookList,size);
+
 //        return Message.success().add("bookList",pageInfo);
         return modelAndView;
     }

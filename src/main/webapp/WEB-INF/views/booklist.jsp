@@ -59,12 +59,12 @@
             <div class="concierge-list">
                 <div class="search-form">
                     <div class="form-item">
-                        <label>用户名</label>
-                        <input id="uname">
+                        <label>书名</label>
+                        <input id="inputBookName">
                     </div>
                     <div class="form-item">
-                        <label>姓名昵称</label>
-                        <input id="name">
+                        <label>分类</label>
+                        <input id="inputBookType">
                     </div>
                     <div class="form-item btns-item">
                         <button class="success" id="new" onclick="onNew()">新增</button>
@@ -87,7 +87,7 @@
                         </thead>
                         <tbody id="list-rows">
 
-                        <c:forEach var="book" items="${books}">
+                        <c:forEach var="book" items="${pageInfo.list}">
                         <tr>
                             <td class="tC">${book.id}</td>
                             <td class="tC">${book.name}</td>
@@ -107,6 +107,44 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- 显示分页信息 -->
+                <div class="row">
+                    <!--分页文字信息  -->
+                    <div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
+                        页,总 ${pageInfo.total } 条记录</div>
+                    <!-- 分页条信息 -->
+                    <div >
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li><a href="${APP_PATH}/bookList">首页</a></li>
+                                <c:if test="${pageInfo.hasPreviousPage }">
+                                    <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pageNum-1}"
+                                           aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                                    </a></li>
+                                </c:if>
+
+
+                                <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                                    <c:if test="${page_Num == pageInfo.pageNum }">
+                                        <li class="active"><a href="${APP_PATH}/bookList">${page_Num }</a></li>
+                                    </c:if>
+                                    <c:if test="${page_Num != pageInfo.pageNum }">
+                                        <li><a href="${APP_PATH }/bookList?pn=${page_Num }">${page_Num }</a></li>
+                                    </c:if>
+
+                                </c:forEach>
+                                <c:if test="${pageInfo.hasNextPage }">
+                                    <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pageNum+1 }"
+                                           aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+                                    </a></li>
+                                </c:if>
+                                <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pages}">末页</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
 
             </div>
             <div class="dialog dialog-page" style="display: none;" id="edit">
@@ -269,10 +307,17 @@ if(opo=="edit"){
         document.getElementById("shadow").style.display="none";
     }
     function loadRecord(){
+        let searchParam = {
+            bookName : document.getElementById("inputBookName").value,
+            bookType : document.getElementById("inputBookType").value
+        }
+        console.log(searchParam)
+        window.location="bookListSearch?bookName=" +  searchParam.bookName + "&bookType=" + searchParam.bookType
         alert("查询成功！");
     }
     function pwdedit() {
         window.location="pwEdit"
     }
+
 </script>
 </html>

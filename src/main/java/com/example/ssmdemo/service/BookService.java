@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookService {
@@ -18,11 +20,20 @@ public class BookService {
     BookMapper bookMapper;
 
 
+    public List<Book> bookSearchList(String bookName, String bookType) {
+        BookExample bookExample = new BookExample();
+        bookExample.createCriteria().andTypeNameLike("%"+bookType+"%").andNameLike("%"+bookName+"%");
+        return bookMapper.selectByExampleWithTypeName(bookExample);
+    }
+
     /*
     查询书本列表
      */
     public List<Book> bookList(){
+
+
         return bookMapper.selectByExampleWithTypeName(null);
+
     }
 
     /*
@@ -37,6 +48,7 @@ public class BookService {
      */
     public List<Book> bookByAuthor(String author){
         BookExample example = new BookExample();
+
         example.createCriteria().andAuthorEqualTo(author);
         return bookMapper.selectByExample(example);
     }
