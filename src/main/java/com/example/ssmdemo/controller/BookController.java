@@ -11,8 +11,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -112,9 +114,11 @@ public class BookController {
     }
 
 
-//上传文件
+    //上传文件
     @RequestMapping("bookSave")
-    public ModelAndView bookSave(String name){
+    public ModelAndView bookSave(MultipartFile img, HttpSession session){
+        String fileName = img.getName();
+        Object name = session.getAttribute("name");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/bookList");
         return modelAndView;

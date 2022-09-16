@@ -27,8 +27,13 @@ public class UserController {
             session.setAttribute("user",user);
             return "redirect:/borrowList";
         }else {
-            return "index";
+            return "redirect:/userLogin";
         }
+    }
+
+    @RequestMapping("userIndex")
+    public String userIndex(){
+        return "singin";
     }
 
     @RequestMapping("userListSearchTest")

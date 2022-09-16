@@ -19,6 +19,21 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/userLogin"/>
+            <mvc:exclude-mapping path="/userIndex"/>
+            <mvc:exclude-mapping path="/"/>
+            <bean id="interceptor" class="com.example.ssmdemo.bean.Interceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+
     <!--两个标准配置  -->
     <!-- 将springmvc不能处理的请求交给tomcat -->
     <mvc:default-servlet-handler/>

@@ -2,6 +2,7 @@ import com.example.ssmdemo.bean.Book;
 import com.example.ssmdemo.bean.User;
 import com.example.ssmdemo.dao.BookMapper;
 import com.example.ssmdemo.dao.UserMapper;
+import com.example.ssmdemo.service.BookService;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,9 @@ public class MybatisTest {
     // 虚拟mvc请求，获取到处理结果。
     MockMvc mockMvc;
 
+    @Autowired
+    BookService bookService;
+
     @Before
     public void initMokcMvc() {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -43,6 +47,7 @@ public class MybatisTest {
         //模拟请求拿到返回值
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/bookList"))
                 .andReturn();
+        System.out.println(bookService+"===========");
         MockHttpServletRequest request = result.getRequest();
 
     }
