@@ -5,6 +5,9 @@ body {color: #888;font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica N
 body > * {margin: auto;text-align: left;}
 * {border-collapse: collapse;box-sizing: border-box;font-style: normal;list-style: none;margin: 0;padding: 0;text-decoration: none;transition: all .2s linear 0s;}
 th,td,input,select,textarea,button,.btn {font-size: 1.4rem;}
+.listwrap {
+    height: 450px;
+}
 ::placeholder {color: #b3b3b3;}
 .before-shadow {position: relative;transition: all 0s linear 0s;}
 .before-shadow > * {background: #fff;position: relative;z-index: 2;}

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <%
@@ -86,7 +87,7 @@
                         </div>
                         <div class="form-item">
                             <label>出版日期: </label>
-                            <input id="publishdate" name="ApDate" value="${book.pdate}" disabled="disabled">
+                            <input id="publishdate" name="ApDate" value="<fmt:formatDate value='${book.pdate}' type='date' pattern="yyyy-MM-dd"/>" disabled="disabled">
                         </div>
                         <div class="form-item">
                             <label>ISBN: </label>

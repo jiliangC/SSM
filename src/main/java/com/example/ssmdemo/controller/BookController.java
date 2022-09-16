@@ -5,6 +5,8 @@ import com.example.ssmdemo.bean.Message;
 import com.example.ssmdemo.bean.Type;
 import com.example.ssmdemo.service.BookService;
 import com.example.ssmdemo.service.TypeService;
+import com.example.ssmdemo.service.impl.BookServiceImpl;
+import com.example.ssmdemo.service.impl.TypeServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

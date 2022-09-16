@@ -8,7 +8,7 @@ body {background: #e7e5d8;}
 .index > .header .toolbar > * {display: block;float: left;height: 52px;}
 .index > .header .toolbar > a {cursor: pointer;line-height: 28px;padding: 12px;}
 .index > .header .toolbar > #signout {text-decoration: underline;}
-.index .main {height: calc(90vh - 72px);;margin: 0 9px;overflow: hidden;position: relative;}
+.index .main {height: calc(90vh - 72px);;margin: 0 9px;overflow: hidden;position: relative; width: 100%}
 .index .main .toolbar {background: #008260;height: calc(90vh - 72px);;margin-right: 9px;position: absolute;width: 48px;z-index: 2;}
 .index .main .toolbar:after {background: url(../images/icons/icon-bars.png);content: '';display: block;height: 65px;margin-top: -32.5px;position: absolute;right: -14px;top: 50%;width: 14px;}
 .index .main .toolbar.close:after {background: url(../images/icon-barc.png);}

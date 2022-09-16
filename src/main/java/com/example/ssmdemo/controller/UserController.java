@@ -1,21 +1,18 @@
 package com.example.ssmdemo.controller;
 
-import com.example.ssmdemo.bean.Book;
 import com.example.ssmdemo.bean.Message;
-import com.example.ssmdemo.bean.Type;
 import com.example.ssmdemo.bean.User;
 import com.example.ssmdemo.service.UserService;
+import com.example.ssmdemo.service.impl.UserServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class UserController {

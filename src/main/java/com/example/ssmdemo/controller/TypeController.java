@@ -1,13 +1,12 @@
 package com.example.ssmdemo.controller;
 
-import com.example.ssmdemo.bean.Borrow;
 import com.example.ssmdemo.bean.Message;
 import com.example.ssmdemo.bean.Type;
 import com.example.ssmdemo.service.TypeService;
+import com.example.ssmdemo.service.impl.TypeServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
