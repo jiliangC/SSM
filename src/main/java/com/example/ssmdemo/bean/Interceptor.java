@@ -20,7 +20,7 @@ public class Interceptor implements HandlerInterceptor {
             return true;
         }
 //        int i = 2/0;
-        throw new ArithmeticException("未登录");
+        throw new RuntimeException("未登录");
     }
 
     @Override

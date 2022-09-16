@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
 
     //@ExceptionHandler用于设置所标识方法处理的异常
-    @ExceptionHandler(ArithmeticException.class)
+    @ExceptionHandler(Exception.class)
     //ex表示当前请求处理中出现的异常对象
     public String handleArithmeticException(Exception ex, Model model){
         String unLogin = ex.getMessage();
