@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ssmdemo.dao.BorrowMapper" >
+  <resultMap id="BaseResultMap" type="com.example.ssmdemo.bean.Borrow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bookid" property="bookid" jdbcType="INTEGER" />
+    <result column="customerid" property="customerid" jdbcType="INTEGER" />
+    <result column="bdate" property="bdate" jdbcType="DATE" />
+    <result column="rdate" property="rdate" jdbcType="DATE" />
+  </resultMap>
+
+<!--  borrow.id id, bookid, customerid, bdate, rdate,b.name bname,c.name cname-->
+  <resultMap id="WithBookAndCustomerResultMap" type="com.example.ssmdemo.bean.Borrow">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bookid" property="bookid" jdbcType="INTEGER" />
+    <result column="customerid" property="customerid" jdbcType="INTEGER" />
+    <result column="bdate" property="bdate" jdbcType="DATE" />
+    <result column="rdate" property="rdate" jdbcType="DATE" />
+    <result column="bname" property="bookName"/>
+    <result column="cname" property="customerName"/>
+  </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bookid, customerid, bdate, rdate
+  </sql>
+
+  <sql id="Association_Column_List" >
+    borrow.id id, bookid, customerid, bdate, rdate,b.name bname,c.name cname
+  </sql>
+
+  <select id="selectByExampleWithBookCustomer" resultMap="WithBookAndCustomerResultMap" parameterType="com.example.ssmdemo.bean.BorrowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Association_Column_List" />
+    from borrow left join book b on bookid=b.id left join customer c on c.id=customerid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.ssmdemo.bean.BorrowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from borrow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from borrow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from borrow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.ssmdemo.bean.BorrowExample" >
+    delete from borrow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.ssmdemo.bean.Borrow" >
+    insert into borrow (id, bookid, customerid, 
+      bdate, rdate)
+    values (#{id,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, 
+      #{bdate,jdbcType=DATE}, #{rdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ssmdemo.bean.Borrow" >
+    insert into borrow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bookid != null" >
+        bookid,
+      </if>
+      <if test="customerid != null" >
+        customerid,
+      </if>
+      <if test="bdate != null" >
+        bdate,
+      </if>
+      <if test="rdate != null" >
+        rdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookid != null" >
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="bdate != null" >
+        #{bdate,jdbcType=DATE},
+      </if>
+      <if test="rdate != null" >
+        #{rdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.ssmdemo.bean.BorrowExample" resultType="java.lang.Integer" >
+    select count(*) from borrow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update borrow
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookid != null" >
+        bookid = #{record.bookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerid != null" >
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bdate != null" >
+        bdate = #{record.bdate,jdbcType=DATE},
+      </if>
+      <if test="record.rdate != null" >
+        rdate = #{record.rdate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update borrow
+    set id = #{record.id,jdbcType=INTEGER},
+      bookid = #{record.bookid,jdbcType=INTEGER},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      bdate = #{record.bdate,jdbcType=DATE},
+      rdate = #{record.rdate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ssmdemo.bean.Borrow" >
+    update borrow
+    <set >
+      <if test="bookid != null" >
+        bookid = #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null" >
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="bdate != null" >
+        bdate = #{bdate,jdbcType=DATE},
+      </if>
+      <if test="rdate != null" >
+        rdate = #{rdate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ssmdemo.bean.Borrow" >
+    update borrow
+    set bookid = #{bookid,jdbcType=INTEGER},
+      customerid = #{customerid,jdbcType=INTEGER},
+      bdate = #{bdate,jdbcType=DATE},
+      rdate = #{rdate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
