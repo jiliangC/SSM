@@ -58,3 +58,49 @@ body {background: #e7e5d8;}
     left: 0;
     z-index: 50;
 }
+td{
+    text-align: center !important;
+}
+.pagination{
+    display: flex; justify-content: center; align-items: center;
+}
+
+.pagination .box{
+
+    width:980px;
+
+    margin:auto;
+
+    text-align:center;}
+
+.pagination ul{
+
+    list-style:none;
+
+    display:inline-block;/*因为ul是块级元素，内容的inline-block+盒子的text-align设置水平居中！否则，text-align无效*/
+
+    padding:0;/*去掉默认的内外边距！*/
+
+    margin:0;
+
+}
+
+.pagination li{
+
+    float:left;
+
+}
+
+.pagination a{ text-decoration:none;
+
+    padding:8px 16px;
+
+    border:1px solid #e8e8e8;
+
+    border-radius:5px;}
+
+.pagination a:hover{
+
+    background-color:#e8e8e8;
+
+}

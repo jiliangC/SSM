@@ -52,7 +52,7 @@
         </div>
         <div class="subpage">
             <div class="book-edit">
-                <div class="title">添加书籍</div>
+                <div class="title">修改用户信息</div>
                 <div class="search-form">
                 </div>
                 <div class="form">

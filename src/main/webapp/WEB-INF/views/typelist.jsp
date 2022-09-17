@@ -14,26 +14,56 @@
     <meta charset="UTF-8">
     <title>图书管理系统</title>
     <%
-        pageContext.setAttribute("APP_PATH",request.getContextPath());
+        pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
     <link href="${APP_PATH }/static/css/dui.css" rel="stylesheet">
     <link href="${APP_PATH }/static/css/main.css" rel="stylesheet">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<%--    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap.min.css"--%>
+<%--          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">--%>
 
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+<%--    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->--%>
+<%--    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css"--%>
+<%--          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">--%>
 
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="${APP_PATH }/static/bootstrap-3.4.1-dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<%--    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->--%>
+<%--    <script src="${APP_PATH }/static/bootstrap-3.4.1-dist/js/bootstrap.min.js"--%>
+<%--            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"--%>
+<%--            crossorigin="anonymous"></script>--%>
     <style type="text/css">
-        .type-list .dialog {height:200px !important;margin-left: -320px;margin-top: -180px;width: 740px;}
-        .type-list .dialog input {width: 60% !important;}
-        .type-list .dialog .btns-item {margin-top: 30px !important;}
-        .type-add{display: none;}
-        .dialog{height:200px;width:600px;}
-        .dialog.dialog-page {height:200px;width:700px;}
-        .dialog.dialog-page .body{height: 200px;width:700px;}
+        .type-list .dialog {
+            height: 200px !important;
+            margin-left: -320px;
+            margin-top: -180px;
+            width: 740px;
+        }
+
+        .type-list .dialog input {
+            width: 60% !important;
+        }
+
+        .type-list .dialog .btns-item {
+            margin-top: 30px !important;
+        }
+
+        .type-add {
+            display: none;
+        }
+
+        .dialog {
+            height: 200px;
+            width: 600px;
+        }
+
+        .dialog.dialog-page {
+            height: 200px;
+            width: 700px;
+        }
+
+        .dialog.dialog-page .body {
+            height: 200px;
+            width: 700px;
+        }
     </style>
 </head>
 <body onload="init()">
@@ -57,9 +87,9 @@
                 <div class="btns-tool">
                     <a id="editbook" title="借阅管理" href="borrowList"></a>
                     <a id="addbook" title="添加图书" href="bookList"></a>
-                    <a id="typemgr" title="类别管理" href="typeList"class="cur"></a>
+                    <a id="typemgr" title="类别管理" href="typeList" class="cur"></a>
                     <a id="bookmgr" title="客户管理" href="customerList"></a>
-                    <a id="usermgr" title="用户管理" href="userList" ></a>
+                    <a id="usermgr" title="用户管理" href="userList"></a>
                 </div>
             </div>
         </div>
@@ -88,76 +118,86 @@
                         <tbody id="list-rows">
 
                         <c:forEach var="type" items="${pageInfo.list}">
-                        <tr>
-                            <td class="tC">${type.id}</td>
-                            <td class="tC">${type.typename}</td>
+                            <tr>
+                                <td class="tC">${type.id}</td>
+                                <td class="tC">${type.typename}</td>
 
-                            <td class="tC">
-                                <a class="edit btn primary" href="#" onclick="onEdit(${type.id})">修改信息</a>
-                                <a class="delete btn danger" href="#" onclick="deleteEle(${type.id})">删除</a>
-                            </td>
-                        </tr></c:forEach>
+                                <td class="tC" style="    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+                                    <a class="edit btn primary" href="#" onclick="onEdit(${type.id})">修改信息</a>
+                                    <a class="delete btn danger" href="#" onclick="deleteEle(${type.id})">删除</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
 
 
                         </tbody>
                     </table>
                 </div>
 
-                <!-- 分页条信息 -->
-                <div >
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li><a href="${APP_PATH}/typeListSearch">首页</a></li>
-                            <c:if test="${pageInfo.hasPreviousPage }">
-                                <li><a href="${APP_PATH }/typeListSearch?pn=${pageInfo.pageNum-1}"
-                                       aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-                                </a></li>
-                            </c:if>
-
-
-                            <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
-                                <c:if test="${page_Num == pageInfo.pageNum }">
-                                    <li class="active"><a href="${APP_PATH}/typeListSearch">${page_Num }</a></li>
-                                </c:if>
-                                <c:if test="${page_Num != pageInfo.pageNum }">
-                                    <li><a href="${APP_PATH }/typeListSearch?pn=${page_Num }">${page_Num }</a></li>
+                <!-- 显示分页信息 -->
+                <div class="row">
+                    <!--分页文字信息  -->
+                    <div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
+                        页,总 ${pageInfo.total } 条记录
+                    </div>
+                    <!-- 分页条信息 -->
+                    <div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li><a href="${APP_PATH}/bookList">首页</a></li>
+                                <c:if test="${pageInfo.hasPreviousPage }">
+                                    <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pageNum-1}"
+                                           aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                                    </a></li>
                                 </c:if>
 
-                            </c:forEach>
-                            <c:if test="${pageInfo.hasNextPage }">
-                                <li><a href="${APP_PATH }/typeListSearch?pn=${pageInfo.pageNum+1 }"
-                                       aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-                                </a></li>
-                            </c:if>
-                            <li><a href="${APP_PATH }/typeListSearch?pn=${pageInfo.pages}">末页</a></li>
-                        </ul>
-                    </nav>
+
+                                <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                                    <c:if test="${page_Num == pageInfo.pageNum }">
+                                        <li class="active"><a href="${APP_PATH}/bookList">${page_Num }</a></li>
+                                    </c:if>
+                                    <c:if test="${page_Num != pageInfo.pageNum }">
+                                        <li><a href="${APP_PATH }/bookList?pn=${page_Num }">${page_Num }</a></li>
+                                    </c:if>
+
+                                </c:forEach>
+                                <c:if test="${pageInfo.hasNextPage }">
+                                    <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pageNum+1 }"
+                                           aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+                                    </a></li>
+                                </c:if>
+                                <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pages}">末页</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
 
             </div>
             <div class="dialog dialog-page" style="display: none;" id="edit">
                 <div class="header">
-                    <span>编辑客户</span><i class="close" onclick="closeEdit()"></i>
+                    <span>编辑类别</span><i class="close" onclick="closeEdit()"></i>
                 </div>
                 <div class="body">
                     <div class="concierge-add">
 
-                            <div class="form">
+                        <div class="form">
 
-                                <form  method="post" id="myform"  action="typeSave">
+                            <form method="post" id="myform" action="typeSave">
                                 <div class="form-item">
                                     <label>类型</label>
                                     <input id="type" name="typename" style="color: #0f0f0f">
                                 </div>
-                                </form>
+                            </form>
 
-                                <div class="form-item btns-item">
-                                    <button class="primary" id="save" onclick="newSave()" style="color: #0f0f0f">保存</button>
-                                    <button id="cancle" onclick="closeEdit()" style="color: #0f0f0f">取消</button>
-                                </div>
-
+                            <div class="form-item btns-item">
+                                <button class="primary" id="save" onclick="newSave()" style="color: #0f0f0f">保存</button>
+                                <button id="cancle" onclick="closeEdit()" style="color: #0f0f0f">取消</button>
                             </div>
+
+                        </div>
 
                     </div>
                 </div>
@@ -169,51 +209,58 @@
 </body>
 <script type="text/javascript">
     var count = 4;
-    function signout(){
-        if(confirm("确定要注销吗？")){
+
+    function signout() {
+        if (confirm("确定要注销吗？")) {
             location.href = "userLoginout";
         }
     }
-    function deleteEle(e){
-        if(confirm("确定要删除吗？")){
-            window.location="typeDelete?id="+e;
+
+    function deleteEle(e) {
+        if (confirm("确定要删除吗？")) {
+            window.location = "typeDelete?id=" + e;
         }
     }
-    function onEdit(id){
+
+    function onEdit(id) {
         //使用js跳转页面
-       window.location="typeList?id="+id;
+        window.location = "typeList?id=" + id;
 
 
     }
-function init() {
-        var opo="${opo}";
-if(opo==="edit"){
- document.getElementById("type").value="${type.typename}";
+
+    function init() {
+        var opo = "${opo}";
+        if (opo === "edit") {
+            document.getElementById("type").value = "${type.typename}";
 
 
-          document.getElementById("edit").style.display="block";
-       document.getElementById("shadow").style.display="block";
-}
-}
-    function onNew(){
-        document.getElementById("edit").style.display="block";
-        document.getElementById("shadow").style.display="block";
+            document.getElementById("edit").style.display = "block";
+            document.getElementById("shadow").style.display = "block";
+        }
     }
-    function newSave(){
+
+    function onNew() {
+        document.getElementById("edit").style.display = "block";
+        document.getElementById("shadow").style.display = "block";
+    }
+
+    function newSave() {
 
         //获取表单的值
         var myform = document.getElementById("myform");
 
         //判断到底是更新还是添加
-        var opo="${opo}";
-        if(opo=="edit"&&myform.title!="save"){
+        var opo = "${opo}";
+        if (opo == "edit" && myform.title != "save") {
             //不建议使用地址加参数，使用的是get请求
-            myform.action="typeUpdate?id=${type.id}";
+            myform.action = "typeUpdate?id=${type.id}";
         }
         myform.submit();
         //提交表单
     }
-    function editSave(){
+
+    function editSave() {
         alert("修改成功！");
         var para = document.createElement("tr");
         var value = document.getElementById("type").value;
@@ -221,24 +268,27 @@ if(opo==="edit"){
         list.appendChild(para);
         closeEdit();
     }
-    function closeEdit(){
+
+    function closeEdit() {
         //还原表单 js代码
-        document.getElementById("type").value="";
+        document.getElementById("type").value = "";
 
         var myform = document.getElementById("myform");
-        myform.title="save";//设置成一个添加标识
-        myform.action="typeSave";
+        myform.title = "save";//设置成一个添加标识
+        myform.action = "typeSave";
 
-        document.getElementById("edit").style.display="none";
-        document.getElementById("shadow").style.display="none";
+        document.getElementById("edit").style.display = "none";
+        document.getElementById("shadow").style.display = "none";
     }
-    function loadRecord(){
+
+    function loadRecord() {
         let typeName = document.getElementById("inputTypeName").value
-        window.location="typeListSearch?typeName=" + typeName
+        window.location = "typeListSearch?typeName=" + typeName
         alert("查询成功！");
     }
+
     function pwdedit() {
-        window.location="pwEdit"
+        window.location = "pwEdit"
     }
 </script>
 </html>

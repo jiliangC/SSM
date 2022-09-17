@@ -18,14 +18,14 @@
     %>
     <link href="${APP_PATH }/static/css/dui.css" rel="stylesheet">
     <link href="${APP_PATH }/static/css/main.css" rel="stylesheet">
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<%--    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->--%>
+<%--    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">--%>
 
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+<%--    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->--%>
+<%--    <link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">--%>
 
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="${APP_PATH }/static/bootstrap-3.4.1-dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<%--    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->--%>
+<%--    <script src="${APP_PATH }/static/bootstrap-3.4.1-dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>--%>
 </head>
 <body onload="init()">
 <div class="index container">
@@ -78,7 +78,8 @@
                             <th style="width: 10%;">序号</th>
                             <th style="width: 10%;">书名</th>
                             <th style="width: 10%;">借书人</th>
-                            <th style="width: 10%;">借书日期</th>
+                            <th style="width: 15%;">借书日期</th>
+                            <th style="width: 15%;">还书日期</th>
                             <th style="width: 10%;">操作</th>
                         </tr>
                         </thead>
@@ -92,6 +93,9 @@
 <%--                            <td class="tC">${row.bdate}</td>--%>
                             <td>
                                 <fmt:formatDate value="${row.bdate}" pattern="yyyy-MM-dd"/>
+                            </td>
+                            <td>
+                                <fmt:formatDate value="${row.rdate}" pattern="yyyy-MM-dd"/>
                             </td>
 
                             <td class="tC">
@@ -151,6 +155,8 @@
         </div>
     </div>
 </div>
+
+
 </body>
 <script type="text/javascript">
 
@@ -162,7 +168,7 @@
     }
     function deleteEle(e){
         if(confirm("确定要删除吗？")){
-            window.location="borrowDelete?id="+e;
+            window.location="borrowDelete/"+e;
         }
     }
     function onEdit(id){

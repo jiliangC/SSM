@@ -117,7 +117,7 @@ public class BookController {
 
 
     //上传文件
-    @RequestMapping("bookSave")
+    @PostMapping("bookSave")
     public ModelAndView bookSave(MultipartFile image, String name,String ename,
                                  String author,String publisher,Integer price,
                                  String pdate, String isbn, String address,

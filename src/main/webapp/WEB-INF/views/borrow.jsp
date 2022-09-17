@@ -52,13 +52,13 @@
         </div>
         <div class="subpage">
             <div class="book-edit">
-                <div class="title">添加书籍</div>
+                <div class="title">借书</div>
                 <div class="search-form">
                 </div>
                 <div class="form">
 
                     <form  method="post" id="myform"  action="borrowSave" >
-
+                        <input type="hidden" name="_method" value="PUT">
 
                         <div class="form-item">
                             <label>图书名称: </label>

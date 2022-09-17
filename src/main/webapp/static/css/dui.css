@@ -74,7 +74,7 @@ button.danger:hover {background: #e56541;border-color: #e56541;}
 /* 数据表格 */
 table {width: 100%;}
 table th {background: #efefef;font-weight: bold;height: 36px;text-align: center;}
-table th,table td {padding: 2px 3px;}
+table th,table td {padding: 2px 3px; text-align: center !important;}
 table tbody tr:nth-child(2n) {background: #efefef;height: 36px;}
 table tbody tr:nth-child(2n + 1) {background: #ffffff;height: 48px;}
 table tbody tr td:last-child{display: flex;}

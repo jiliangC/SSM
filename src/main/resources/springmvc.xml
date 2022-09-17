@@ -37,6 +37,7 @@
             <mvc:exclude-mapping path="/userLogin"/>
             <mvc:exclude-mapping path="/userIndex"/>
             <mvc:exclude-mapping path="/singin"/>
+            <mvc:exclude-mapping path="/static/**"/>
             <mvc:exclude-mapping path="/"/>
             <bean id="interceptor" class="com.example.ssmdemo.bean.Interceptor"/>
         </mvc:interceptor>

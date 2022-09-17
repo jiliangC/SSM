@@ -59,7 +59,6 @@
                 <div class="form">
 
                     <form  method="post" id="myform"  action="bookSave" enctype="multipart/form-data" >
-
                         <div class="form-item">
                             <label>书名: </label>
                             <input id="name" name="name">
