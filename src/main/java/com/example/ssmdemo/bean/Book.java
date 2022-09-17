@@ -27,7 +27,15 @@ public class Book {
 
     private String image;
 
-    private String typeName;
+    private Type type;
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;
@@ -125,12 +133,7 @@ public class Book {
         this.image = image == null ? null : image.trim();
     }
 
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public Book() {
     }
 
     @Override
@@ -148,7 +151,7 @@ public class Book {
                 ", brief='" + brief + '\'' +
                 ", typeid=" + typeid +
                 ", image='" + image + '\'' +
-                ", typeName='" + typeName + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

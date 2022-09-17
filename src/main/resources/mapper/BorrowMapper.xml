@@ -16,8 +16,13 @@
     <result column="customerid" property="customerid" jdbcType="INTEGER" />
     <result column="bdate" property="bdate" jdbcType="DATE" />
     <result column="rdate" property="rdate" jdbcType="DATE" />
-    <result column="bname" property="bookName"/>
-    <result column="cname" property="customerName"/>
+    <association property="book" javaType="Book">
+      <result column="bname" property="name"/>
+    </association>
+    <association property="customer" javaType="Customer">
+      <result column="cname" property="name"/>
+    </association>
+
   </resultMap>
 
   <sql id="Example_Where_Clause" >

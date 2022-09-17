@@ -17,7 +17,8 @@
     <result column="image" property="image" jdbcType="VARCHAR" />
   </resultMap>
 
-  <resultMap id="WithTypeResultMap" type="com.example.ssmdemo.bean.Book" >
+
+  <resultMap id="WithTypeResultMapTwo" type="com.example.ssmdemo.bean.Book" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="ename" property="ename" jdbcType="VARCHAR" />
@@ -30,14 +31,17 @@
     <result column="brief" property="brief" jdbcType="VARCHAR" />
     <result column="typeid" property="typeid" jdbcType="INTEGER" />
     <result column="image" property="image" jdbcType="VARCHAR" />
-    <result column="typename" property="typeName" jdbcType="VARCHAR" />
+    <association property="type" javaType="Type">
+      <result column="typename" property="typename"/>
+    </association>
   </resultMap>
+
 
   <sql id="WithType_Column_List" >
     book.id id, book.name name, ename, author, publisher, pdate, isbn, price, address, brief, typeid, image, typename
   </sql>
 
-  <select id="bookSearchList" parameterType="Map" resultMap="WithTypeResultMap">
+  <select id="bookSearchList" parameterType="Map" resultMap="WithTypeResultMapTwo">
     select
     <include refid="WithType_Column_List"/>
     from book left join type on book.typeid = type.id
@@ -130,7 +134,7 @@
   <sql id="WithType_Column_Lists" >
     book.id id, book.name name, ename, author, publisher, pdate, isbn, price, address, brief, typeid, image, typename
   </sql>
-  <select id="selectByExampleWithTypeName" resultMap="WithTypeResultMap" parameterType="com.example.ssmdemo.bean.BookExample" >
+  <select id="selectByExampleWithTypeName" resultMap="WithTypeResultMapTwo" parameterType="com.example.ssmdemo.bean.BookExample" >
     select
     <if test="distinct" >
       distinct
@@ -152,7 +156,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByPrimaryKeyWithName" resultMap="WithTypeResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKeyWithName" resultMap="WithTypeResultMapTwo" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from book

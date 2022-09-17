@@ -102,8 +102,8 @@
                             <td class="tC">${book.author}</td>
                             <td class="tC">${book.publisher}</td>
                             <td class="tC">${book.price}</td>
-                            <td class="tC">${book.typeName}</td>
-                            <td class="tC"><img src="/upload/${book.image}" style="height: 60px;width:60px;"></td>
+                            <td class="tC">${book.type.typename}</td>
+                            <td class="tC"><img src="${APP_PATH }/upload/${book.image}" style="height: 60px;width:60px;"></td>
 
                             <td class="tC">
                                 <a class="edit btn primary" href="#" onclick="onEdit(${book.id})">修改信息</a>
@@ -127,7 +127,7 @@
                             <ul class="pagination">
                                 <li><a href="${APP_PATH}/bookList">首页</a></li>
                                 <c:if test="${pageInfo.hasPreviousPage }">
-                                    <li><a href="${APP_PATH }/bookListSearch?pn=${pageInfo.pageNum-1}"
+                                    <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pageNum-1}"
                                            aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
                                     </a></li>
                                 </c:if>
@@ -135,19 +135,19 @@
 
                                 <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
                                     <c:if test="${page_Num == pageInfo.pageNum }">
-                                        <li class="active"><a href="${APP_PATH}/bookListSearch">${page_Num }</a></li>
+                                        <li class="active"><a href="${APP_PATH}/bookList">${page_Num }</a></li>
                                     </c:if>
                                     <c:if test="${page_Num != pageInfo.pageNum }">
-                                        <li><a href="${APP_PATH }/bookListSearch?pn=${page_Num }">${page_Num }</a></li>
+                                        <li><a href="${APP_PATH }/bookList?pn=${page_Num }">${page_Num }</a></li>
                                     </c:if>
 
                                 </c:forEach>
                                 <c:if test="${pageInfo.hasNextPage }">
-                                    <li><a href="${APP_PATH }/bookListSearch?pn=${pageInfo.pageNum+1 }"
+                                    <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pageNum+1 }"
                                            aria-label="Next"> <span aria-hidden="true">&raquo;</span>
                                     </a></li>
                                 </c:if>
-                                <li><a href="${APP_PATH }/bookListSearch?pn=${pageInfo.pages}">末页</a></li>
+                                <li><a href="${APP_PATH }/bookList?pn=${pageInfo.pages}">末页</a></li>
                             </ul>
                         </nav>
                     </div>

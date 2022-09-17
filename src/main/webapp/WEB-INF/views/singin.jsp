@@ -32,7 +32,7 @@
 		.sign-form .btns-item button {border-radius: 0;height: 54px;width: 100%;}
 	</style>
 </head>
-<body>
+<body onload="judge()">
 <div class="signbox container items-8">
 	<img class="item-6 logo" src="${APP_PATH }/static/images/icons/signin-logo.png">
 	<div class="item-6 sign-form">
@@ -65,6 +65,11 @@
 		}
 		var myform = document.getElementById("myform");
 		myform.submit();
+	}
+	function judge(){
+		var opo="${fail}";
+		if(opo==="账号或密码错误")
+			alert("账号或密码错误")
 	}
 </script>
 </html>

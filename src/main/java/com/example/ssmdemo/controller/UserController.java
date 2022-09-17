@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,13 +22,18 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("userLogin")
-    public String userLogin(String phone, String pass, HttpSession session){
+    public ModelAndView userLogin(String phone, String pass, HttpSession session){
         User user = userService.isUser(phone,pass);
         if (user!=null){
             session.setAttribute("user",user);
-            return "redirect:/borrowList";
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("redirect:/borrowList");
+            return mv;
         }else {
-            return "redirect:/userLogin";
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("fail","’À∫≈ªÚ√‹¬Î¥ÌŒÛ");
+            mv.setViewName("singin");
+            return mv;
         }
     }
 

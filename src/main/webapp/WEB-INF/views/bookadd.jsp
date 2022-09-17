@@ -27,7 +27,7 @@
 <body>
 <div class="index container">
     <div class="header">
-        <img class="logo" src="images/logo.png">
+        <img class="logo" src="${APP_PATH }/static/images/logo.png">
         <div class="title">
             <h3>百疆书社 -- 图书馆管理</h3>
             <h5>BAIJIANG BOOKSTORE LIBRARY MANAGE</h5>

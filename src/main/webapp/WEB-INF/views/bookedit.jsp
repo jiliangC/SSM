@@ -108,7 +108,7 @@
                         <div class="file-item">
                             <label>照片: </label>
                             <%--<input id="pic" type="file" accept="image/*" onchange="xmTanUploadImg(this)" name="image">--%>
-                            <img style="width: 100px;height:100px;float: left;" id="xmTanImg" src="/upload/${book.image}"/><br/>
+                            <img style="width: 100px;height:100px;float: left;" id="xmTanImg" src="${APP_PATH }/upload/${book.image}"/><br/>
 
                         </div>
 

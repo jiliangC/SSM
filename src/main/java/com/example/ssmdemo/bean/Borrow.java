@@ -13,10 +13,10 @@ public class Borrow {
 
     private Date rdate;
 
-    //不在表内的属性，不要随便赋值
-    private String bookName;
 
-    private String customerName;
+    private Book book;
+
+    private Customer customer;
 
     public Integer getId() {
         return id;
@@ -58,19 +58,23 @@ public class Borrow {
         this.rdate = rdate;
     }
 
-    public String getBookName() {
-        return bookName;
+
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Borrow() {
     }
 }

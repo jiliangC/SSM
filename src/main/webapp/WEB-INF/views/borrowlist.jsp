@@ -87,8 +87,8 @@
                         <c:forEach var="row" items="${pageInfo.list}">
                         <tr>
                             <td class="tC">${row.id}</td>
-                            <td class="tC">${row.bookName}</td>
-                            <td class="tC">${row.customerName}</td>
+                            <td class="tC">${row.book.name}</td>
+                            <td class="tC">${row.customer.name}</td>
 <%--                            <td class="tC">${row.bdate}</td>--%>
                             <td>
                                 <fmt:formatDate value="${row.bdate}" pattern="yyyy-MM-dd"/>
@@ -116,7 +116,7 @@
                             <ul class="pagination">
                                 <li><a href="${APP_PATH}/borrowList">首页</a></li>
                                 <c:if test="${pageInfo.hasPreviousPage }">
-                                    <li><a href="${APP_PATH }/borrowListSearch?pn=${pageInfo.pageNum-1}"
+                                    <li><a href="${APP_PATH }/borrowList?pn=${pageInfo.pageNum-1}"
                                            aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
                                     </a></li>
                                 </c:if>
@@ -124,10 +124,10 @@
 
                                 <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
                                     <c:if test="${page_Num == pageInfo.pageNum }">
-                                        <li class="active"><a href="${APP_PATH}/borrowListSearch">${page_Num }</a></li>
+                                        <li class="active"><a href="${APP_PATH}/borrowList">${page_Num }</a></li>
                                     </c:if>
                                     <c:if test="${page_Num != pageInfo.pageNum }">
-                                        <li><a href="${APP_PATH }/borrowListSearch?pn=${page_Num }">${page_Num }</a></li>
+                                        <li><a href="${APP_PATH }/borrowList?pn=${page_Num }">${page_Num }</a></li>
                                     </c:if>
 
                                 </c:forEach>
@@ -136,7 +136,7 @@
                                            aria-label="Next"> <span aria-hidden="true">&raquo;</span>
                                     </a></li>
                                 </c:if>
-                                <li><a href="${APP_PATH }/borrowListSearch?pn=${pageInfo.pages}">末页</a></li>
+                                <li><a href="${APP_PATH }/borrowList?pn=${pageInfo.pages}">末页</a></li>
                             </ul>
                         </nav>
                     </div>

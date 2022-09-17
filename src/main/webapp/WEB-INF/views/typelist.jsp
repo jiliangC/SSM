@@ -148,13 +148,13 @@
                                 <form  method="post" id="myform"  action="typeSave">
                                 <div class="form-item">
                                     <label>类型</label>
-                                    <input id="type" name="typename">
+                                    <input id="type" name="typename" style="color: #0f0f0f">
                                 </div>
                                 </form>
 
                                 <div class="form-item btns-item">
-                                    <button class="primary" id="save" onclick="newSave()">保存</button>
-                                    <button id="cancle" onclick="closeEdit()">取消</button>
+                                    <button class="primary" id="save" onclick="newSave()" style="color: #0f0f0f">保存</button>
+                                    <button id="cancle" onclick="closeEdit()" style="color: #0f0f0f">取消</button>
                                 </div>
 
                             </div>
@@ -187,8 +187,8 @@
     }
 function init() {
         var opo="${opo}";
-if(opo=="edit"){
- document.getElementById("type").value="${type.type}";
+if(opo==="edit"){
+ document.getElementById("type").value="${type.typename}";
 
 
           document.getElementById("edit").style.display="block";

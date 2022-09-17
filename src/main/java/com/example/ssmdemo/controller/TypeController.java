@@ -29,6 +29,7 @@ public class TypeController {
 
     @RequestMapping("typeList")
     public ModelAndView typeList(
+            Integer id,
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
             @RequestParam(value="size",defaultValue = "5") Integer size,
             @RequestParam(value = "typeName", defaultValue="") String typeName) {
@@ -37,6 +38,13 @@ public class TypeController {
         List<Type> typeList = typeService.typeListSearch(typeName);
         PageInfo<Type> pageInfo = new PageInfo<>(typeList,size);
         ModelAndView modelAndView = new ModelAndView();
+
+        if (id!=null){
+            Type type = typeService.typeById(id);
+            modelAndView.addObject("type",type);
+            modelAndView.addObject("opo","edit");
+        }
+
         modelAndView.addObject("pageInfo", pageInfo);
         modelAndView.setViewName("typelist");
         return modelAndView;

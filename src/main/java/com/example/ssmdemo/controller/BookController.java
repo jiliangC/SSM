@@ -5,8 +5,6 @@ import com.example.ssmdemo.bean.Message;
 import com.example.ssmdemo.bean.Type;
 import com.example.ssmdemo.service.BookService;
 import com.example.ssmdemo.service.TypeService;
-import com.example.ssmdemo.service.impl.BookServiceImpl;
-import com.example.ssmdemo.service.impl.TypeServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class BookController {
@@ -116,9 +118,40 @@ public class BookController {
 
     //上传文件
     @RequestMapping("bookSave")
-    public ModelAndView bookSave(MultipartFile img, HttpSession session){
-        String fileName = img.getName();
-        Object name = session.getAttribute("name");
+    public ModelAndView bookSave(MultipartFile image, String name,String ename,
+                                 String author,String publisher,Integer price,
+                                 String pdate, String isbn, String address,
+                                 String brief,HttpSession session,Integer typeid) throws IOException {
+        Book book = new Book();
+        book.setName(name);
+        book.setAddress(address);
+        book.setBrief(brief);
+        book.setEname(ename);
+        book.setIsbn(isbn);
+        book.setPublisher(publisher);
+        book.setAuthor(author);
+        book.setPrice(price);
+        book.setTypeid(typeid);
+        //获取上传的文件的文件名
+        String fileName = image.getOriginalFilename();
+        //处理文件重名问题
+        String hzName = fileName.substring(fileName.lastIndexOf("."));
+        fileName = UUID.randomUUID().toString() + hzName;
+
+        book.setImage(fileName);
+        bookService.bookAdd(book);
+        //获取服务器中photo目录的路径
+        ServletContext servletContext = session.getServletContext();
+        String photoPath = servletContext.getRealPath("upload");
+        File file = new File(photoPath);
+        if(!file.exists()){
+            file.mkdir();
+        }
+        String finalPath = photoPath + File.separator + fileName;
+        //实现上传功能
+        image.transferTo(new File(finalPath));
+
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/bookList");
         return modelAndView;

@@ -51,6 +51,9 @@ public class Customer {
         this.company = company == null ? null : company.trim();
     }
 
+    public Customer() {
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

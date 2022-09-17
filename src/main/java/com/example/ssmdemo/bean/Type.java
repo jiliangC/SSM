@@ -5,6 +5,9 @@ public class Type {
 
     private String typename;
 
+    public Type(String name) {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -19,5 +22,13 @@ public class Type {
 
     public void setTypename(String typename) {
         this.typename = typename == null ? null : typename.trim();
+    }
+
+    public Type(Integer id, String typename) {
+        this.id = id;
+        this.typename = typename;
+    }
+
+    public Type() {
     }
 }
