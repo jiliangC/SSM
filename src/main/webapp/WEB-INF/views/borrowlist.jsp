@@ -168,7 +168,7 @@
     }
     function deleteEle(e){
         if(confirm("确定要删除吗？")){
-            window.location="borrowDelete/"+e;
+            window.location="borrowDelete?id="+e;
         }
     }
     function onEdit(id){
