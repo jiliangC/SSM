@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-item">
                             <label class="name-label">手机号码</label>
-                            <input id="phone" name="phone" value="${customer.phone}">
+                            <input id="phone" name="phone" value="${customer.phone}" type="number">
                         </div>
                         <div class="form-item">
                             <label class="name-label">住址</label>

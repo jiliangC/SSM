@@ -1,5 +1,8 @@
 package com.example.ssmdemo.bean;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Book {
@@ -81,8 +84,14 @@ public class Book {
         return pdate;
     }
 
-    public void setPdate(Date pdate) {
-        this.pdate = pdate;
+    public void setPdate(String pdate_S) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            this.pdate = df.parse(pdate_S);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public String getIsbn() {

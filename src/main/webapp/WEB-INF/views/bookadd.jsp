@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-item">
                             <label>出版日期: </label>
-                            <input id="publishdate" name="pdate">
+                            <input id="publishdate" name="pdate" type="date">
                         </div>
                         <div class="form-item">
                             <label>ISBN: </label>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-item">
                             <label>价格: </label>
-                            <input id="price" name="price">
+                            <input id="price" name="price" type="number">
                         </div>
                         <div class="form-item">
                             <label>存放位置: </label>

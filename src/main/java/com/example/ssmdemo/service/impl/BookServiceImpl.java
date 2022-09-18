@@ -77,7 +77,7 @@ public class BookServiceImpl implements com.example.ssmdemo.service.BookService 
     @Override
     public boolean bookAdd(Book book){
         try {
-            book.setPdate(getDate());
+//            book.setPdate(getDate());
             return bookMapper.insertSelective(book)==1;
         }catch (Exception e){
             e.printStackTrace();

@@ -16,8 +16,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
+
 
 @RestController
 public class BookController {
@@ -121,7 +123,7 @@ public class BookController {
     public ModelAndView bookSave(MultipartFile image, String name,String ename,
                                  String author,String publisher,Integer price,
                                  String pdate, String isbn, String address,
-                                 String brief,HttpSession session,Integer typeid) throws IOException {
+                                 String brief,HttpSession session,Integer typeid) throws IOException, ParseException {
         Book book = new Book();
         book.setName(name);
         book.setAddress(address);
@@ -132,6 +134,8 @@ public class BookController {
         book.setAuthor(author);
         book.setPrice(price);
         book.setTypeid(typeid);
+        book.setPdate(pdate);
+
         //获取上传的文件的文件名
         String fileName = image.getOriginalFilename();
         //处理文件重名问题
