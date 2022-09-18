@@ -43,7 +43,7 @@ public class BorrowController {
     @RequestMapping("/borrowListSearch")
     public ModelAndView borrowListSearch(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "8") Integer size,
             @RequestParam(value = "bookName", defaultValue="") String bookName,
             @RequestParam(value = "username", defaultValue="") String username) {
 

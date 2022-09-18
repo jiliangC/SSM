@@ -74,11 +74,11 @@
                         <label>用户名</label>
                         <input id="inputUsername">
                     </div>
-                    <div class="form-item">
+                    <div class="form-item" style="display: none">
                         <label>地址</label>
                         <input id="inputAddress">
                     </div>
-                    <div class="form-item">
+                    <div class="form-item" style="display: none">
                         <label>工作单位</label>
                         <input id="inputCompany">
                     </div>
