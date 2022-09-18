@@ -46,7 +46,7 @@ public class UserController {
     public ModelAndView userListSearchTest(
             HttpSession session,
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "phone", defaultValue="") String phone,
             @RequestParam(value = "username", defaultValue="") String username) {
 
@@ -62,7 +62,7 @@ public class UserController {
     @RequestMapping("userListSearch")
     public ModelAndView userListSearch(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "phone", defaultValue="") String phone,
             @RequestParam(value = "username", defaultValue="") String username) {
 
@@ -78,7 +78,7 @@ public class UserController {
     @GetMapping("userList")
     public ModelAndView userList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "phone", defaultValue="") String phone,
             @RequestParam(value = "username", defaultValue="") String username) {
 

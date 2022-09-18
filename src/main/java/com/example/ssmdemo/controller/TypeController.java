@@ -31,7 +31,7 @@ public class TypeController {
     public ModelAndView typeList(
             Integer id,
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "typeName", defaultValue="") String typeName) {
 
         PageHelper.startPage(pn,size);
@@ -53,7 +53,7 @@ public class TypeController {
     @RequestMapping("typeListSearch")
     public ModelAndView typeListSearch(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "typeName", defaultValue="") String typeName) {
 
         PageHelper.startPage(pn,size);

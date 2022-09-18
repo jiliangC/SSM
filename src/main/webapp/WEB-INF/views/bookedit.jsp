@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-item">
                             <label>出版日期: </label>
-                            <input id="publishdate" name="ApDate" type="date" value="<fmt:formatDate value='${book.pdate}' type='date' pattern="yyyy-MM-dd"/>">
+                            <input id="publishdate" name="pdate" type="date" value="<fmt:formatDate value='${book.pdate}' type='date' pattern="yyyy-MM-dd"/>">
                         </div>
                         <div class="form-item">
                             <label>ISBN: </label>

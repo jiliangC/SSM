@@ -32,7 +32,7 @@ public class CustomerController {
     @RequestMapping("customerList")
     public ModelAndView customerList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "phone", defaultValue="") String phone,
             @RequestParam(value = "username", defaultValue="") String username,
             @RequestParam(value = "address", defaultValue="") String address,
@@ -51,7 +51,7 @@ public class CustomerController {
     @RequestMapping("customerListSearch")
     public ModelAndView customerListSearch(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "phone", defaultValue="") String phone,
             @RequestParam(value = "username", defaultValue="") String username,
             @RequestParam(value = "address", defaultValue="") String address,
@@ -114,7 +114,7 @@ public class CustomerController {
     @GetMapping("CustomerList")
     public Message CustomerList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size){
+            @RequestParam(value="size",defaultValue = "9") Integer size){
         PageHelper.startPage(pn,size);
         List<Customer> Customers = customerService.customerList();
         PageInfo<Customer> pageInfo = new PageInfo<>(Customers,size);

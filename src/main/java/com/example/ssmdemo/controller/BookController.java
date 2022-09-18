@@ -34,7 +34,7 @@ public class BookController {
     @RequestMapping("bookListSearch")
     public ModelAndView bookListSearch(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size,
+            @RequestParam(value="size",defaultValue = "6") Integer size,
             @RequestParam(value = "bookName", defaultValue="") String bookName,
             @RequestParam(value = "bookType", defaultValue="") String bookType) {
 
@@ -51,7 +51,7 @@ public class BookController {
 //    @RequestMapping("bookList")
 //    public ModelAndView bookList(
 //            @RequestParam(value = "pn", defaultValue="1") Integer pn,
-//            @RequestParam(value="size",defaultValue = "5") Integer size,
+//            @RequestParam(value="size",defaultValue = "6") Integer size,
 //            @RequestParam(value = "bookName", defaultValue="") String bookName,
 //            @RequestParam(value = "bookType", defaultValue="") String bookType) {
 //
@@ -68,7 +68,7 @@ public class BookController {
     @RequestMapping("bookList")
     public ModelAndView bookList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "5") Integer size){
+            @RequestParam(value="size",defaultValue = "6") Integer size){
         PageHelper.startPage(pn,size);
         List<Book> bookList = bookService.bookList();
         ModelAndView modelAndView = new ModelAndView();

@@ -30,7 +30,7 @@ public class BorrowController {
     @RequestMapping("/borrowList")
     public ModelAndView borrowList(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "8") Integer size){
+            @RequestParam(value="size",defaultValue = "9") Integer size){
         PageHelper.startPage(pn,size);
         List<Borrow> borrows = borrowService.borrowList();
         PageInfo<Borrow> pageInfo = new PageInfo<>(borrows,size);
@@ -43,7 +43,7 @@ public class BorrowController {
     @RequestMapping("/borrowListSearch")
     public ModelAndView borrowListSearch(
             @RequestParam(value = "pn", defaultValue="1") Integer pn,
-            @RequestParam(value="size",defaultValue = "8") Integer size,
+            @RequestParam(value="size",defaultValue = "9") Integer size,
             @RequestParam(value = "bookName", defaultValue="") String bookName,
             @RequestParam(value = "username", defaultValue="") String username) {
 
